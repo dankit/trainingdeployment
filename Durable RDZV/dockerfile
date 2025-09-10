@@ -1,0 +1,8 @@
+FROM pytorch/pytorch:2.8.0-cuda12.8-cudnn9-devel
+
+COPY rdzv_server.py /app/rdzv_server.py
+COPY test.py /app/test.py
+WORKDIR /app
+
+# Run the rdzv server
+CMD ["python", "rdzv_server.py"]

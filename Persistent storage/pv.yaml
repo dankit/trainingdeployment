@@ -1,0 +1,13 @@
+# pv.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: checkpoints-pv
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteOnce
+  gcePersistentDisk:
+    pdName: training-cluster-disk
+    fsType: ext4

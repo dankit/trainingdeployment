@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: rdzv-server
+  labels:
+    app: rdzv-server
+spec:
+  nodeSelector:
+    cloud.google.com/gke-preemptible: "false"   # durable node
+  containers:
+    - name: rdzv
+      image: us-central1-docker.pkg.dev/apt-passage-465114-b4/reranker-training-repo/reranker-training
+      command: ["torchrun"]
+      args: [
+        "--rdzv_backend=c10d",
+        "--rdzv_endpoint=0.0.0.0:29400",
+        "--standalone"
+      ]
+      ports:
+        - containerPort: 29400
