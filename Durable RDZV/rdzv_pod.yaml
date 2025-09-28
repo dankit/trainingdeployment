@@ -6,15 +6,11 @@ metadata:
     app: rdzv-server
 spec:
   nodeSelector:
-    cloud.google.com/gke-preemptible: "false"   # durable node
+    cloud.google.com/gke-nodepool: default-pool   # durable node
   containers:
     - name: rdzv
       image: us-central1-docker.pkg.dev/apt-passage-465114-b4/reranker-training-repo/reranker-training
-      command: ["torchrun"]
-      args: [
-        "--rdzv_backend=c10d",
-        "--rdzv_endpoint=0.0.0.0:29400",
-        "--standalone"
-      ]
+      command: ["python"]
+      args: ["rdzv_server.py"]
       ports:
         - containerPort: 29400

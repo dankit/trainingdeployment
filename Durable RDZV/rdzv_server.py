@@ -7,7 +7,5 @@ server_store = TCPStore("127.0.0.1", 29400, is_master=True)
 c10backend = C10dRendezvousBackend(server_store, "run_0")
 rdzv_handler = DynamicRendezvousHandler.from_backend(run_id="run_0", store=server_store, backend=c10backend, min_nodes=1, max_nodes=3)
 
-print(f"Rendezvous server running on port 29400...")
-
 # Keep the process alive indefinitely
 threading.Event().wait()
